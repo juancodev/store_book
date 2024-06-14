@@ -41,7 +41,8 @@ export const getMainProducts = async () => {
       }),
       // cache: 'force-cache' -> default
       next: {
-        revalidate: 10 // reload cache cada 10 segundos
+        revalidate: 10, // reload cache cada 10 segundos
+        tags: ['main-products']
       }
     })
     const { products } = await response.json();
