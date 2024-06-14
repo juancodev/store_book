@@ -1,19 +1,25 @@
 import React from "react";
 import { ProductsWrapper } from "app/components/Store/ProductsWrapper";
-import { getProducts } from "app/services/shopify";
-
-interface CategoryProps {
-  params: {
-    categories: string[];
-    searchParams?: {
-      search: string;
-    };
-  };
-}
+import { getProducts } from "app/services/shopify/products";
+import {
+  getCollectionProducts,
+  getCollections,
+} from "app/services/shopify/collections";
 
 export default async function Category(props: CategoryProps) {
-  const products = await getProducts();
   const { categories } = props.params;
+  console.log("categories", categories);
+  let products = [];
+  const collections = await getCollections();
+
+  if (categories?.length > 0) {
+    const selectedCollectionId = collections.find(
+      (collection: CollectionType) => collection.handle === categories[0]
+    ).id;
+    products = await getCollectionProducts(selectedCollectionId);
+  } else {
+    products = await getProducts();
+  }
 
   return (
     <>

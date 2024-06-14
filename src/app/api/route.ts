@@ -1,4 +1,4 @@
-import { getProducts } from "app/services/shopify"
+import { getProducts } from "app/services/shopify/products"
 
 // Back For Front: Nos sirve para delegar del lado del cliente al servidor.
 export async function GET() {

@@ -3,6 +3,21 @@ interface ErrorPageProps {
   reset: () => void;
 }
 
+interface CategoryProps {
+  params: {
+    categories: string[];
+    searchParams?: {
+      search: string;
+    };
+  };
+}
+
+interface ProductPageProps {
+  searchParams: {
+    id: string;
+  }
+}
+
 interface Product {
   id: number;
   title: string;
@@ -18,8 +33,13 @@ interface Product {
   price: number;
   tags: string;
   status: string;
+  quantity: number;
   admin_graphql_api_id?: string;
-  variants: string[];
+  variants: {
+    admin_graphql_api_id: string;
+    price: number;
+    inventory_quantity: number;
+  }[];
   options: string[];
   images: {
     src: string
@@ -35,6 +55,31 @@ interface Product {
     width: number;
     height: number;
     src: string;
-    variant_ids: number[];
+    variant_ids: [];
   }
+}
+
+type ProductType = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+  quantity: number;
+  handle: string;
+  tags: string;
+};
+
+interface CollectionType {
+  id: number;
+  title: string;
+  handle: string;
+}
+
+interface ProductViewProps {
+  product: ProductType;
+}
+
+interface ProductViewItemsOrderProps {
+  maxQuantity: number;
 }
